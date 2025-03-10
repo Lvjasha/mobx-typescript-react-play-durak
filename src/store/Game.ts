@@ -37,6 +37,7 @@ class Game {
     this.attackCard = card;
   }
 
+  //определение кто ходит первым
   defineStep(myCards: Card[], hisCards: Card[]) {
     const myJuniorTrumpRank = this.defineJuniorTrumpCard(myCards);
     const hisJuniorTrumpRank = this.defineJuniorTrumpCard(hisCards);
@@ -59,6 +60,18 @@ class Game {
     this.trumpCard = this.deckCards[35].type;
   }
 
+  startGame() {
+    this.deckCards = allCards;
+    this.mixDeck();
+
+    const firstHisCards = this.reduceCards(6);
+    const firstMyCards = this.reduceCards(6);
+
+    this.defineStep(firstMyCards, firstHisCards);
+
+    return { firstMyCards, firstHisCards };
+  }
+
   addPlayersCards(my: any, his: any) {}
 
   defineJuniorTrumpCard(cards: Card[]) {
@@ -72,6 +85,7 @@ class Game {
     return 0;
   }
 
+  // взятые карты из колоды
   reduceCards(countCards: number): Array<Card> {
     const removedCard = this.deckCards.splice(0, countCards);
     return removedCard;
