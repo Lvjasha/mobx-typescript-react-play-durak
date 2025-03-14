@@ -15,4 +15,4 @@ class MyCards extends PlayerCards {
   }
 }
 
-export default new MyCards();
+export default MyCards;

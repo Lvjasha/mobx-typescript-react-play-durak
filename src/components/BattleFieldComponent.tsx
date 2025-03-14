@@ -1,11 +1,28 @@
 import * as React from 'react';
-// import {CoupleCard} from
-// import CardComponent
+import { CoupleCard } from '../types';
+import CardComponent from './CardComponent';
 
-interface IBattleFieldComponentProps {}
+interface IBattleFieldComponentProps {
+  cards: CoupleCard;
+}
 
-const BattleFieldComponent: React.FC<IBattleFieldComponentProps> = () => {
-  return <div></div>;
+const BattleFieldComponent: React.FC<IBattleFieldComponentProps> = ({
+  cards,
+}) => {
+  return (
+    <div>
+      <div className="battleField">
+        {cards.his.map((card) => (
+          <CardComponent card={card} key={card.id} />
+        ))}
+      </div>
+      <div className="battleField">
+        {cards.my.map((card) => (
+          <CardComponent card={card} key={card.id} />
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default BattleFieldComponent;

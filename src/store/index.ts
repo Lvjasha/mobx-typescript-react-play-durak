@@ -4,4 +4,4 @@ import battleField from './BattleField';
 import Game from './Game';
 
 const game = new Game();
-export { MyCards, HisCards, battleField, game };
+export { myCards, hisCards, battleField, game };

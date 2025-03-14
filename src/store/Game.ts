@@ -1,6 +1,7 @@
 import { Card, TypeCard } from './../types';
 import { cards as allCards, cards } from './../cards';
 import { action, makeObservable, observable } from 'mobx';
+import { hisCards } from '.';
 
 class Game {
   trumpCard: TypeCard = TypeCard.bubi;
@@ -72,7 +73,13 @@ class Game {
     return { firstMyCards, firstHisCards };
   }
 
-  addPlayersCards(my: any, his: any) {}
+  addPlayersCards(my: any, his: any) {
+    const myNeed = 6 - my.cards.length;
+    const hisNeed = 6 - his.cards.length;
+    //снятие карт с мутированием колоды
+    my.addCards(this.reduceCards(myNeed > 0 ? myNeed : 0));
+    his.addCards(this.reduceCards(hisNeed > 0 ? hisNeed : 0));
+  }
 
   defineJuniorTrumpCard(cards: Card[]) {
     const trumpRanks = cards
