@@ -34,6 +34,25 @@ class MyCards extends PlayerCards {
       // возвращаем эту карту
       return card;
     }
+    // если нечего подкинуть для атаки
+    alert('Такой карты нет на поле битвы');
+  }
+
+  // определение защиты
+  myDefense(card: Card, attackCard: Card) {
+    // определение карты ранга выше той, которой били, и той же масти
+    const strongerCard =
+      card.rank > attackCard.rank && card.type === attackCard.type;
+    // если отбиваем некозырную карту козырной
+    const strongerTrumpCard =
+      attackCard.type !== game.trumpCard && card.type === game.trumpCard;
+
+    if (strongerCard || strongerTrumpCard) {
+      // у себя уменьшаем на эту карту
+      this.reduceCard(card.id);
+      // возвращаем эту карту
+      return card;
+    }
 
     alert('У него карта сильнее');
   }

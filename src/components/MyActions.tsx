@@ -1,7 +1,30 @@
-import React from 'react';
+import * as React from 'react';
 
-function MyActions() {
-  return <div>MyActions</div>;
+interface IMyActionsProps {
+  isMyAttack: boolean;
+  onRepulsed: () => void;
+  onGetCard: () => void;
 }
+
+const MyActions: React.FC<IMyActionsProps> = ({
+  isMyAttack,
+  onRepulsed,
+  onGetCard,
+}) => {
+  const classes = ['btn-actions'];
+
+  if (!isMyAttack) {
+    classes.push('red-btn');
+  }
+
+  return (
+    <button
+      className={classes.join(' ')}
+      onClick={isMyAttack ? onRepulsed : onGetCard}
+    >
+      {isMyAttack ? 'Бита' : 'Беру'}
+    </button>
+  );
+};
 
 export default MyActions;

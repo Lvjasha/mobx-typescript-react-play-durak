@@ -8,6 +8,7 @@ import MyCardsComponents from '../components/MyCardsComponents';
 import { battleField, game, hisCards, myCards } from '../store';
 import { Card } from '../types';
 import DeckComponent from '../components/DeckComponent';
+import MyActions from '../components/MyActions';
 
 const Main: React.FC = observer(() => {
   const startGame = () => {
@@ -44,6 +45,13 @@ const Main: React.FC = observer(() => {
     }
   };
 
+  const getCard = () => {
+    myCards.addCards([...battleField.cards.my, ...battleField.cards.his]);
+    game.toggleStep();
+    game.setIsGetCard(true);
+    battleField.clearBattleField(myCards, hisCards);
+  };
+
   useEffect(startGame, []);
 
   useEffect(hisAction, [game.isMyStep]);
@@ -52,10 +60,15 @@ const Main: React.FC = observer(() => {
     <>
       <HisCardsComponents cards={hisCards.cards} />
       <BattleFieldComponent cards={battleField.cards} />
-      <MyCardsComponents cards={myCards.cards} onStep={() => {}} />
+      <MyCardsComponents cards={myCards.cards} onStep={clickMyCard} />
       <DeckComponent
         cardBallance={game.deckCards.length}
         trump={game.trumpCard}
+      />
+      <MyActions
+        isMyAttack={game.isMyAttack}
+        onRepulsed={() => battleField.clearBattleField(myCards, hisCards)}
+        onGetCard={getCard}
       />
     </>
   );

@@ -19,8 +19,8 @@ const DeckComponent: React.FC<IDeckComponentProps> = ({
   };
   return (
     <div className="deckInfo">
-      // этот див самозакрывающийся, из-за dangerouslySetInnerHTML (иначе не
-      работает)
+      {/* этот див самозакрывающийся, из-за dangerouslySetInnerHTML (иначе не
+      работает) */}
       <div
         className={trumps[trump].color}
         dangerouslySetInnerHTML={trumps[trump].code}
