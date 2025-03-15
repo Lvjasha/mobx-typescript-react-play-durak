@@ -1,5 +1,5 @@
-import MyCards from './MyCards';
-import HisCards from './HisCards';
+import myCards from './MyCards';
+import hisCards from './HisCards';
 import battleField from './BattleField';
 import Game from './Game';
 
